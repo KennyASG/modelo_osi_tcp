@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const layers = [
   {
@@ -56,32 +56,55 @@ const layers = [
     bgColor: "bg-gradient-to-r from-pink-700 to-pink-500",
     textColor: "text-[#f472b6]",
     imgSrc: "/osi_fisica.svg",
-  },
+  }
 ];
 
+const layerDetails = {
+  7: "7. Capa de Aplicación (Application): Proporciona servicios de red a las aplicaciones del usuario final, actuando como una interfaz entre las aplicaciones y los servicios de red. Define protocolos que las aplicaciones utilizan para comunicarse entre sí.",
+  6: "6. Capa de Presentación (Presentation): Traduce, cifra y comprime los datos para la capa de aplicación. Se encarga de la representación de los datos, asegurando que la información enviada por la capa de aplicación de un sistema pueda ser leída por la capa de aplicación de otro sistema.",
+  5: "5. Capa de Sesión (Session): Establece, gestiona y termina sesiones entre aplicaciones en diferentes dispositivos. Coordina y organiza el intercambio de datos entre las aplicaciones.",
+  4: "4. Capa de Transporte (Transport): Proporciona una transferencia de datos confiable y transparente entre los sistemas finales, incluyendo el control de flujo, el establecimiento y terminación de conexiones, y la corrección de errores de extremo a extremo.",
+  3: "3. Capa de Red (Network): Gestiona el direccionamiento lógico y el enrutamiento de paquetes a través de la red. Determina la ruta que deben seguir los datos desde el origen hasta el destino a través de múltiples redes.",
+  2: "2. Capa de Enlace de Datos (Data Link): Proporciona la transferencia de datos de nodo a nodo, incluyendo la detección y corrección de errores que puedan ocurrir en la capa física. Organiza los bits en tramas de datos y controla el acceso al medio de transmisión.",
+  1: "1. Capa Física (Physical): Se encarga de la transmisión y recepción de bits sin procesar a través de un medio físico. Define las características eléctricas, mecánicas, de procedimiento y funcionales para activar, mantener y desactivar la conexión física entre sistemas."
+};
+
 const ModeloOSI = ({ expandApplicationLayer }) => {
+  const [expandedLayer, setExpandedLayer] = useState(null);
+
+  const handleExpand = (id) => {
+    setExpandedLayer(expandedLayer === id ? null : id);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center w-full overflow-hidden">
       {layers.map((layer) => (
-        <div
-          key={layer.id}
-          className={`w-full ${expandApplicationLayer && layer.id === 7 ? 'h-84' : 'h-28'} ${layer.bgColor} text-white flex items-center relative px-4 py-4 transition transform duration-300 hover:scale-105 hover:shadow-2xl`}
-        >
-          <div className="absolute left-12 top-4 text-2xl font-bold">
-            {layer.id}
+        <div key={layer.id} className="w-full">
+          <div
+            className={`w-full ${expandApplicationLayer && layer.id === 7 ? 'h-84' : 'h-28'} ${layer.bgColor} text-white flex items-center relative px-4 py-4 transition transform duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer`}
+            onClick={() => handleExpand(layer.id)}
+          >
+            <div className="absolute left-12 top-4 text-2xl font-bold">
+              {layer.id}
+            </div>
+            <div className="absolute left-12 top-12 w-20 h-2 bg-gray-300"></div>
+            <div className="text-left flex-1 relative ml-24 overflow-hidden">
+              <h2 className="text-4xl font-bold px-4 py-2 rounded-full inline-block transform translate-x-10 shadow-lg">
+                {layer.title}
+              </h2>
+              <p className={`mt-2 text-left font-sans text-lg ml-12 ${layer.textColor} font-bold`}>
+                PROTOCOLOS: {layer.protocols}
+              </p>
+            </div>
+            <div className="absolute top-1/2 transform -translate-y-1/2 right-28 px-4">
+              <img src={layer.imgSrc} alt={layer.title} className="w-16 h-16" />
+            </div>
           </div>
-          <div className="absolute left-12 top-12 w-20 h-2 bg-gray-300"></div>
-          <div className="text-left flex-1 relative ml-24 overflow-hidden">
-            <h2 className="text-4xl font-bold px-4 py-2 rounded-full inline-block transform translate-x-10 shadow-lg">
-              {layer.title}
-            </h2>
-            <p className={`mt-2 text-left font-sans text-lg ml-12 ${layer.textColor} font-bold`}>
-              PROTOCOLOS: {layer.protocols}
-            </p>
-          </div>
-          <div className="absolute top-1/2 transform -translate-y-1/2 right-28 px-4">
-            <img src={layer.imgSrc} alt={layer.title} className="w-16 h-16" />
-          </div>
+          {expandedLayer === layer.id && (
+            <div className="p-4 text-lg bg-gray-200 text-black">
+              <p className="whitespace-pre-wrap">{layerDetails[layer.id]}</p>
+            </div>
+          )}
         </div>
       ))}
     </div>

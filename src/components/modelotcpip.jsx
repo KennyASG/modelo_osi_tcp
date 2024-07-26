@@ -45,7 +45,7 @@ const layers = [
 
 const Modelotcpip = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-full">
+    <div className="flex flex-col items-center justify-center w-full overflow-hidden">
       {layers.map((layer) => (
         <div
           key={layer.id}
@@ -55,7 +55,7 @@ const Modelotcpip = () => {
             {layer.id}
           </div>
           <div className="absolute left-12 top-12 w-20 h-2 bg-gray-300"></div>
-          <div className="text-left flex-1 relative ml-24">
+          <div className="text-left flex-1 relative ml-24 overflow-hidden">
             <h2 className="text-4xl font-bold px-4 py-2 rounded-full inline-block transform translate-x-10 shadow-lg">
               {layer.title}
             </h2>

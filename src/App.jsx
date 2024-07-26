@@ -7,6 +7,7 @@ function App() {
   const [view, setView] = useState('osi');
   const [checked, setChecked] = useState(true);
   const [expandApplicationLayer, setExpandApplicationLayer] = useState(false);
+  const [expandDataAccessLayer, setExpandDataAccessLayer] = useState(false);
 
   const handleToggleChange = (nextChecked) => {
     setChecked(nextChecked);
@@ -16,6 +17,7 @@ function App() {
   const handleCompareClick = () => {
     setView('compare');
     setExpandApplicationLayer(true);
+    setExpandDataAccessLayer(true);
   };
 
   return (
@@ -55,16 +57,14 @@ function App() {
       </div>
 
       {view === 'osi' && <div className="w-full"><ModeloOSI expandApplicationLayer={expandApplicationLayer} /></div>}
-      {view === 'tcp' && <div className="w-full"><Modelotcpip expandApplicationLayer={expandApplicationLayer} /></div>}
+      {view === 'tcp' && <div className="w-full"><Modelotcpip expandApplicationLayer={expandApplicationLayer} expandDataAccessLayer={expandDataAccessLayer} /></div>}
       {view === 'compare' && (
-        <div className="flex w-full">
+        <div className="flex w-full mt-10">
           <div className="w-1/2">
-            <h2 className="text-center text-2xl font-bold text-white">Modelo OSI</h2>
             <ModeloOSI expandApplicationLayer={expandApplicationLayer} />
           </div>
           <div className="w-1/2">
-            <h2 className="text-center text-2xl font-bold text-white">Modelo TCP/IP</h2>
-            <Modelotcpip expandApplicationLayer={expandApplicationLayer} />
+            <Modelotcpip expandApplicationLayer={expandApplicationLayer} expandDataAccessLayer={expandDataAccessLayer} />
           </div>
         </div>
       )}

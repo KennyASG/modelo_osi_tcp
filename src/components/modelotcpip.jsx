@@ -3,7 +3,7 @@ import React from "react";
 
 const layers = [
   {
-    id: 5,
+    id: 4,
     title: "APLICACION",
     protocols: "DNS, FTP, POP3/IMAP, HTTP",
     bgColor: "bg-gradient-to-r from-purple-800 to-purple-500",
@@ -11,7 +11,7 @@ const layers = [
     imgSrc: "/aplicaciontcp.svg",
   },
   {
-    id: 4,
+    id: 3,
     title: "TRANSPORTE",
     protocols: "TCP, UDP",
     bgColor: "bg-gradient-to-r from-yellow-600 to-yellow-400",
@@ -19,7 +19,7 @@ const layers = [
     imgSrc: "/transporttcp.svg",
   },
   {
-    id: 3,
+    id: 2,
     title: "INTERNET",
     protocols: "IPv4, IPv6, BGP, ICMP",
     bgColor: "bg-gradient-to-r from-teal-700 to-teal-500",
@@ -27,30 +27,28 @@ const layers = [
     imgSrc: "/internettcp.svg",
   },
   {
-    id: 2,
-    title: "VINCULO DE DATOS",
+    id: 1,
+    title: "ACCESO DE DATOS",
     protocols: "ETHERNET, Wi-Fi",
     bgColor: "bg-gradient-to-r from-blue-600 to-blue-400",
     textColor: "text-[#60A5FA]",
     imgSrc: "/datalinktcp.svg",
-  },
-  {
-    id: 1,
-    title: "FISICA",
-    protocols: "10 BASE T, 802.11",
-    bgColor: "bg-gradient-to-r from-gray-600 to-gray-400",
-    textColor: "text-[#9AA1AD]",
-    imgSrc: "/physicaltcp.svg",
-  },
+  }
 ];
 
-const Modelotcpip = ({ expandApplicationLayer }) => {
+const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full overflow-hidden">
       {layers.map((layer) => (
         <div
           key={layer.id}
-          className={`w-full ${expandApplicationLayer && layer.id === 5 ? 'h-[21.8rem]' : 'h-28'} ${layer.bgColor} text-white flex items-center relative px-4 py-4 transition transform duration-300 hover:scale-105 hover:shadow-2xl`}
+          className={`w-full ${
+            expandApplicationLayer && layer.id === 4
+              ? 'h-[21.8rem]' // Tres veces el tamaño original
+              : expandDataAccessLayer && layer.id === 1
+              ? 'h-56' // Dos veces el tamaño original
+              : 'h-28'
+          } ${layer.bgColor} text-white flex items-center relative px-4 py-4 transition transform duration-300 hover:scale-105 hover:shadow-2xl`}
         >
           <div className="absolute left-12 top-4 text-2xl font-bold">
             {layer.id}

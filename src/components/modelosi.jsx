@@ -1,6 +1,6 @@
-// modelosi.jsx
 import React, { useState } from "react";
 import Modal from "react-modal";
+import EjemplosOSI from "./EjemplosOSI";
 
 const layers = [
   {
@@ -58,46 +58,49 @@ const layers = [
     bgColor: "bg-gradient-to-r from-pink-700 to-pink-500",
     textColor: "text-[#f472b6]",
     imgSrc: "/osi_fisica.svg",
-  }
+  },
 ];
 
 const layerDetails = {
-  7: "Modelo OSI\n1. Capa de Aplicación (Application): Proporciona servicios de red a las aplicaciones del usuario final, actuando como una interfaz entre las aplicaciones y los servicios de red. Define protocolos que las aplicaciones utilizan para comunicarse entre sí.",
-  6: "Modelo OSI\n2. Capa de Presentación (Presentation): Traduce, cifra y comprime los datos para la capa de aplicación. Se encarga de la representación de los datos, asegurando que la información enviada por la capa de aplicación de un sistema pueda ser leída por la capa de aplicación de otro sistema.",
-  5: "Modelo OSI\n3. Capa de Sesión (Session): Establece, gestiona y termina sesiones entre aplicaciones en diferentes dispositivos. Coordina y organiza el intercambio de datos entre las aplicaciones.",
-  4: "Modelo OSI\n4. Capa de Transporte (Transport): Proporciona una transferencia de datos confiable y transparente entre los sistemas finales, incluyendo el control de flujo, el establecimiento y terminación de conexiones, y la corrección de errores de extremo a extremo.",
-  3: "Modelo OSI\n5. Capa de Red (Network): Gestiona el direccionamiento lógico y el enrutamiento de paquetes a través de la red. Determina la ruta que deben seguir los datos desde el origen hasta el destino a través de múltiples redes.",
-  2: "Modelo OSI\n6. Capa de Enlace de Datos (Data Link): Proporciona la transferencia de datos de nodo a nodo, incluyendo la detección y corrección de errores que puedan ocurrir en la capa física. Organiza los bits en tramas de datos y controla el acceso al medio de transmisión.",
-  1: "Modelo OSI\n7. Capa Física (Physical): Se encarga de la transmisión y recepción de bits sin procesar a través de un medio físico. Define las características eléctricas, mecánicas, de procedimiento y funcionales para activar, mantener y desactivar la conexión física entre sistemas."
+  7: "7. Capa de Aplicación (Application): Proporciona servicios de red a las aplicaciones del usuario final, actuando como una interfaz entre las aplicaciones y los servicios de red. Define protocolos que las aplicaciones utilizan para comunicarse entre sí.",
+  6: "6. Capa de Presentación (Presentation): Traduce, cifra y comprime los datos para la capa de aplicación. Se encarga de la representación de los datos, asegurando que la información enviada por la capa de aplicación de un sistema pueda ser leída por la capa de aplicación de otro sistema.",
+  5: "5. Capa de Sesión (Session): Establece, gestiona y termina sesiones entre aplicaciones en diferentes dispositivos. Coordina y organiza el intercambio de datos entre las aplicaciones.",
+  4: "4. Capa de Transporte (Transport): Proporciona una transferencia de datos confiable y transparente entre los sistemas finales, incluyendo el control de flujo, el establecimiento y terminación de conexiones, y la corrección de errores de extremo a extremo.",
+  3: "3. Capa de Red (Network): Gestiona el direccionamiento lógico y el enrutamiento de paquetes a través de la red. Determina la ruta que deben seguir los datos desde el origen hasta el destino a través de múltiples redes.",
+  2: "2. Capa de Enlace de Datos (Data Link): Proporciona la transferencia de datos de nodo a nodo, incluyendo la detección y corrección de errores que puedan ocurrir en la capa física. Organiza los bits en tramas de datos y controla el acceso al medio de transmisión.",
+  1: "1. Capa Física (Physical): Se encarga de la transmisión y recepción de bits sin procesar a través de un medio físico. Define las características eléctricas, mecánicas, de procedimiento y funcionales para activar, mantener y desactivar la conexión física entre sistemas.",
 };
 
 const examples = {
-  7: "Ejemplos de Capa de Aplicación: Navegadores web (HTTP), clientes de correo (SMTP, POP3), clientes FTP.",
-  6: "Ejemplos de Capa de Presentación: Compresión de datos (JPEG, MPEG), cifrado de datos (SSL, TLS).",
-  5: "Ejemplos de Capa de Sesión: Control de sesión (RPC, NetBIOS, PPTP).",
-  4: "Ejemplos de Capa de Transporte: Protocolo de Control de Transmisión (TCP), Protocolo de Datagramas de Usuario (UDP).",
-  3: "Ejemplos de Capa de Red: Protocolo de Internet (IP), Protocolo de Mensajes de Control de Internet (ICMP), Protocolo de Seguridad de Internet (IPSec).",
-  2: "Ejemplos de Capa de Enlace de Datos: Ethernet, Protocolo Punto a Punto (PPP), Switches.",
-  1: "Ejemplos de Capa Física: RS232, Wi-Fi, DSL."
+  7: "Ejemplos de esta capa: Navegadores web (HTTP), clientes de correo (SMTP, POP3), clientes FTP.",
+  6: "Ejemplos de esta capa: Compresión de datos (JPEG, MPEG), cifrado de datos (SSL, TLS).",
+  5: "Ejemplos de esta capa: Control de sesión (RPC, NetBIOS, PPTP).",
+  4: "Ejemplos de esta capa: Protocolo de Control de Transmisión (TCP), Protocolo de Datagramas de Usuario (UDP).",
+  3: "Ejemplos de esta capa: Protocolo de Internet (IP), Protocolo de Mensajes de Control de Internet (ICMP), Protocolo de Seguridad de Internet (IPSec).",
+  2: "Ejemplos de esta capa: Ethernet, Protocolo Punto a Punto (PPP), Switches.",
+  1: "Ejemplos de esta capa: RS232, Wi-Fi, DSL.",
 };
 
 const ModeloOSI = ({ expandApplicationLayer }) => {
   const [expandedLayer, setExpandedLayer] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentExample, setCurrentExample] = useState("");
+  const [currentTitle, setCurrentTitle] = useState("");
 
   const handleExpand = (id) => {
     setExpandedLayer(expandedLayer === id ? null : id);
   };
 
-  const openModal = (example) => {
+  const openModal = (example, title) => {
     setCurrentExample(example);
+    setCurrentTitle(title);
     setModalIsOpen(true);
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
     setCurrentExample("");
+    setCurrentTitle("");
   };
 
   return (
@@ -105,7 +108,11 @@ const ModeloOSI = ({ expandApplicationLayer }) => {
       {layers.map((layer) => (
         <div key={layer.id} className="w-full">
           <div
-            className={`w-full ${expandApplicationLayer && layer.id === 7 ? 'h-84' : 'h-28'} ${layer.bgColor} text-white flex items-center relative px-4 py-4 transition transform duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer`}
+            className={`w-full ${
+              expandApplicationLayer && layer.id === 7 ? "h-84" : "h-28"
+            } ${
+              layer.bgColor
+            } text-white flex items-center relative px-4 py-4 transition transform duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer`}
             onClick={() => handleExpand(layer.id)}
           >
             <div className="absolute left-12 top-4 text-2xl font-bold">
@@ -116,13 +123,24 @@ const ModeloOSI = ({ expandApplicationLayer }) => {
               <h2 className="text-4xl font-bold px-4 py-2 rounded-full inline-block transform translate-x-10 shadow-lg">
                 {layer.title}
               </h2>
-              <p className={`mt-2 text-left font-sans text-lg ml-12 ${layer.textColor} font-bold`}>
+              <p
+                className={`mt-2 text-left font-sans text-lg ml-12 ${layer.textColor} font-bold`}
+              >
                 PROTOCOLOS: {layer.protocols}
               </p>
             </div>
-            <div className="absolute top-1/2 transform -translate-y-1/2 right-28 px-4 text-center" onClick={() => openModal(examples[layer.id])}>
-              <img src={layer.imgSrc} alt={layer.title} className="w-16 h-16 mx-auto cursor-pointer" />
-              <p className="mt-2 text-white text-sm cursor-pointer">Ver Ejemplos</p>
+            <div
+              className="absolute top-1/2 transform -translate-y-1/2 right-28 px-4 text-center"
+              onClick={() => openModal(examples[layer.id], layer.title)}
+            >
+              <img
+                src={layer.imgSrc}
+                alt={layer.title}
+                className="w-16 h-16 mx-auto cursor-pointer"
+              />
+              <p className="mt-2 text-white text-sm cursor-pointer">
+                Ver Ejemplos
+              </p>
             </div>
           </div>
           {expandedLayer === layer.id && (
@@ -138,15 +156,28 @@ const ModeloOSI = ({ expandApplicationLayer }) => {
         contentLabel="Ejemplos"
         className="bg-white p-4 rounded shadow-lg"
         overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+        style={{ content: { height: "80vh", overflow: "auto" } }}
       >
-        <h2 className="text-xl font-bold mb-4">Ejemplos</h2>
-        <p className="text-lg">{currentExample}</p>
-        <button
-          className="mt-4 px-4 py-2 bg-red-600 text-white rounded shadow hover:bg-red-500"
-          onClick={closeModal}
+        <div
+          className="p-4 rounded shadow-lg h-full flex flex-col justify-between"
+          style={{
+            backgroundImage: "url('/network-background.svg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
-          Cerrar
-        </button>
+          <div>
+            <h2 className="text-xl font-bold mb-4 text-black">{currentTitle}</h2>
+            <p className="text-lg text-black">{currentExample}</p>
+            <EjemplosOSI layerTitle={currentTitle} />
+          </div>
+          <button
+            className="mt-4 px-4 py-2 bg-red-600 text-white rounded shadow hover:bg-red-500"
+            onClick={closeModal}
+          >
+            Cerrar
+          </button>
+        </div>
       </Modal>
     </div>
   );

@@ -1,4 +1,6 @@
+// modelotcpip.jsx
 import React, { useState } from "react";
+import Modal from "react-modal";
 
 const layers = [
   {
@@ -27,7 +29,7 @@ const layers = [
   },
   {
     id: 1,
-    title: "ACCESO DE RED",
+    title: "ACCESO DE DATOS",
     protocols: "ETHERNET, Wi-Fi",
     bgColor: "bg-gradient-to-r from-blue-600 to-blue-400",
     textColor: "text-[#60A5FA]",
@@ -36,17 +38,36 @@ const layers = [
 ];
 
 const layerDetails = {
-  4: "4. Capa de Aplicación (Application): Proporciona servicios de red directamente a las aplicaciones del usuario final. Esta capa permite que las aplicaciones accedan a los servicios de red y define los protocolos utilizados por las aplicaciones para comunicarse.",
-  3: "3. Capa de Transporte (Transport): Asegura la transmisión confiable de datos entre dispositivos mediante el control de flujo, corrección de errores y segmentación de datos. Gestiona la comunicación de extremo a extremo y la retransmisión de datos perdidos o dañados.",
-  2: "2. Capa de Internet (Network): Se encarga del direccionamiento lógico y el enrutamiento de paquetes de datos a través de diferentes redes. Determina la mejor ruta para que los datos lleguen a su destino y maneja la fragmentación y reensamblaje de paquetes.",
-  1: "1. Capa de Acceso a la Red (Network Interface): Define los métodos para la transmisión de datos a través del medio físico de la red. Esto incluye especificaciones sobre los formatos de tramas de datos, protocolos de acceso al medio y transmisión física."
+  4: "Modelo TCP/IP\n1. Capa de Aplicación (Application): Proporciona servicios de red directamente a las aplicaciones del usuario final. Esta capa permite que las aplicaciones accedan a los servicios de red y define los protocolos utilizados por las aplicaciones para comunicarse.",
+  3: "Modelo TCP/IP\n2. Capa de Transporte (Transport): Asegura la transmisión confiable de datos entre dispositivos mediante el control de flujo, corrección de errores y segmentación de datos. Gestiona la comunicación de extremo a extremo y la retransmisión de datos perdidos o dañados.",
+  2: "Modelo TCP/IP\n3. Capa de Internet (Network): Se encarga del direccionamiento lógico y el enrutamiento de paquetes de datos a través de diferentes redes. Determina la mejor ruta para que los datos lleguen a su destino y maneja la fragmentación y reensamblaje de paquetes.",
+  1: "Modelo TCP/IP\n4. Capa de Acceso a la Red (Network Interface): Define los métodos para la transmisión de datos a través del medio físico de la red. Esto incluye especificaciones sobre los formatos de tramas de datos, protocolos de acceso al medio y transmisión física."
+};
+
+const examples = {
+  4: "Ejemplos de Capa de Aplicación: Navegadores web (HTTP), clientes de correo (SMTP, POP3), clientes FTP.",
+  3: "Ejemplos de Capa de Transporte: Protocolo de Control de Transmisión (TCP), Protocolo de Datagramas de Usuario (UDP).",
+  2: "Ejemplos de Capa de Internet: Protocolo de Internet (IP), Protocolo de Mensajes de Control de Internet (ICMP), Protocolo de Pasarela Exterior (BGP).",
+  1: "Ejemplos de Capa de Acceso a la Red: Ethernet, Wi-Fi, DSL."
 };
 
 const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
   const [expandedLayer, setExpandedLayer] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [currentExample, setCurrentExample] = useState("");
 
   const handleExpand = (id) => {
     setExpandedLayer(expandedLayer === id ? null : id);
+  };
+
+  const openModal = (example) => {
+    setCurrentExample(example);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setCurrentExample("");
   };
 
   return (
@@ -69,8 +90,9 @@ const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
                 PROTOCOLOS: {layer.protocols}
               </p>
             </div>
-            <div className="absolute top-1/2 transform -translate-y-1/2 right-28 px-4">
-              <img src={layer.imgSrc} alt={layer.title} className="w-16 h-16" />
+            <div className="absolute top-1/2 transform -translate-y-1/2 right-28 px-4 text-center" onClick={() => openModal(examples[layer.id])}>
+              <img src={layer.imgSrc} alt={layer.title} className="w-16 h-16 mx-auto cursor-pointer" />
+              <p className="mt-2 text-white text-sm cursor-pointer">Ver Ejemplos</p>
             </div>
           </div>
           {expandedLayer === layer.id && (
@@ -80,6 +102,22 @@ const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
           )}
         </div>
       ))}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Ejemplos"
+        className="bg-white p-4 rounded shadow-lg"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+      >
+        <h2 className="text-xl font-bold mb-4">Ejemplos</h2>
+        <p className="text-lg">{currentExample}</p>
+        <button
+          className="mt-4 px-4 py-2 bg-red-600 text-white rounded shadow hover:bg-red-500"
+          onClick={closeModal}
+        >
+          Cerrar
+        </button>
+      </Modal>
     </div>
   );
 };

@@ -4,12 +4,18 @@ import ModeloOSI from './components/modelosi';
 import Modelotcpip from './components/modelotcpip';
 
 function App() {
-  const [view, setView] = useState('osi'); // Estado inicial para mostrar el modelo OSI
-  const [checked, setChecked] = useState(true); // Estado inicial para el toggle switch
+  const [view, setView] = useState('osi');
+  const [checked, setChecked] = useState(true);
+  const [expandApplicationLayer, setExpandApplicationLayer] = useState(false);
 
   const handleToggleChange = (nextChecked) => {
     setChecked(nextChecked);
     setView(nextChecked ? 'osi' : 'tcp');
+  };
+
+  const handleCompareClick = () => {
+    setView('compare');
+    setExpandApplicationLayer(true);
   };
 
   return (
@@ -41,24 +47,24 @@ function App() {
           </label>
           <button
             className="px-4 py-2 bg-red-600 text-white rounded shadow hover:bg-red-500"
-            onClick={() => setView('compare')}
+            onClick={handleCompareClick}
           >
             Comparar Modelos
           </button>
         </div>
       </div>
 
-      {view === 'osi' && <div className="w-full"><ModeloOSI /></div>}
-      {view === 'tcp' && <div className="w-full"><Modelotcpip /></div>}
+      {view === 'osi' && <div className="w-full"><ModeloOSI expandApplicationLayer={expandApplicationLayer} /></div>}
+      {view === 'tcp' && <div className="w-full"><Modelotcpip expandApplicationLayer={expandApplicationLayer} /></div>}
       {view === 'compare' && (
         <div className="flex w-full">
           <div className="w-1/2">
             <h2 className="text-center text-2xl font-bold text-white">Modelo OSI</h2>
-            <ModeloOSI />
+            <ModeloOSI expandApplicationLayer={expandApplicationLayer} />
           </div>
           <div className="w-1/2">
             <h2 className="text-center text-2xl font-bold text-white">Modelo TCP/IP</h2>
-            <Modelotcpip />
+            <Modelotcpip expandApplicationLayer={expandApplicationLayer} />
           </div>
         </div>
       )}

@@ -59,13 +59,13 @@ const layers = [
   },
 ];
 
-const ModeloOSI = () => {
+const ModeloOSI = ({ expandApplicationLayer }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full overflow-hidden">
       {layers.map((layer) => (
         <div
           key={layer.id}
-          className={`w-full h-28 ${layer.bgColor} text-white flex items-center relative px-4 py-4 transition transform duration-300 hover:scale-105 hover:shadow-2xl`}
+          className={`w-full ${expandApplicationLayer && layer.id === 7 ? 'h-84' : 'h-28'} ${layer.bgColor} text-white flex items-center relative px-4 py-4 transition transform duration-300 hover:scale-105 hover:shadow-2xl`}
         >
           <div className="absolute left-12 top-4 text-2xl font-bold">
             {layer.id}

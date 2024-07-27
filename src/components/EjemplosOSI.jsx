@@ -60,8 +60,7 @@ const EjemplosOSI = ({ layerTitle }) => {
               <div>
                 <h2 className="text-xl font-bold mb-2">{image.alt}</h2>
                 <p className="mb-2">{image.definition}</p>
-                <p className="mb-2">{image.reason}</p>
-                <p className="mb-2">{image.useCases}</p>
+                <p className="mb-2 font-bold">{image.reason}</p>
               </div>
             </div>
           </CSSTransition>

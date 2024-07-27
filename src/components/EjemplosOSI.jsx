@@ -3,7 +3,7 @@ import React from "react";
 const ejemplosPorCapaOSI = {
   "APLICACION": [
     "/osi_aplicacion1.jpeg",
-    "/osi_aplicacion2.png",
+    "/osi_aplicacion2.jpeg",
   ],
   "PRESENTACION": [
     "/osi_presentacion1.png",
@@ -26,8 +26,8 @@ const ejemplosPorCapaOSI = {
     "/osi_enlace_datos2.png",
   ],
   "FISICA": [
-    "/osi_fisica1.png",
-    "/osi_fisica2.png",
+    "/osi_fisica1.jpeg",
+    "/osi_fisica2.jpeg",
   ],
 };
 

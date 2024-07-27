@@ -26,7 +26,7 @@ function App() {
       style={{ backgroundImage: "url('/network-background.svg')" }}
     >
       <div className="w-full flex justify-between items-center p-4">
-        <h1 className="text-2xl font-bold text-black">
+        <h1 className="text-[3rem] font-bold text-slate-500 font-nunito ">
           {view === 'compare' ? 'Modelo OSI & Modelo TCP/IP' : view === 'osi' ? 'Modelo OSI' : 'Modelo TCP/IP'}
         </h1>
         <div className="flex flex-col items-center">
@@ -48,7 +48,7 @@ function App() {
             <span className="ml-2 text-lg text-black">Modelo OSI</span>
           </label>
           <button
-            className="px-4 py-2 bg-red-600 text-white rounded shadow hover:bg-red-500"
+            className="px-4 py-2 bg-red-600 text-white rounded shadow hover:bg-red-500 font-nunito"
             onClick={handleCompareClick}
           >
             Comparar Modelos

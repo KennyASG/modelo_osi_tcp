@@ -5,7 +5,7 @@ import EjemplosOSI from "./EjemplosOSI";
 const layers = [
   {
     id: 7,
-    title: "APLICACION",
+    title: "APLICACIÓN",
     protocols: "HTTP, FTP, SMTP, POP3",
     bgColor: "bg-gradient-to-r from-purple-800 to-purple-500",
     textColor: "text-[#ba76f9]",
@@ -13,7 +13,7 @@ const layers = [
   },
   {
     id: 6,
-    title: "PRESENTACION",
+    title: "PRESENTACIÓN",
     protocols: "JPEG, MPEG, SSL, TLS",
     bgColor: "bg-gradient-to-r from-yellow-600 to-yellow-400",
     textColor: "text-[#facc15]",
@@ -21,7 +21,7 @@ const layers = [
   },
   {
     id: 5,
-    title: "SESION",
+    title: "SESIÓN",
     protocols: "RPC, NetBIOS, PPTP",
     bgColor: "bg-gradient-to-r from-teal-700 to-teal-500",
     textColor: "text-[#14B7A6]",

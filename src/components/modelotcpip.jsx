@@ -5,7 +5,7 @@ import EjemplosTCPIP from "./EjemplosTCPIP";
 const layers = [
   {
     id: 4,
-    title: "APLICACION",
+    title: "APLICACIÓN",
     protocols: "DNS, FTP, POP3/IMAP, HTTP",
     bgColor: "bg-gradient-to-r from-purple-800 to-purple-500",
     textColor: "text-[#ba76f9]",
@@ -74,7 +74,7 @@ const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full overflow-hidden">
+    <div className="flex flex-col items-center justify-center w-full overflow-hidden font-nunito">
       {layers.map((layer) => (
         <div key={layer.id} className="w-full">
           <div
@@ -86,7 +86,7 @@ const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
             </div>
             <div className="absolute left-12 top-12 w-20 h-2 bg-gray-300"></div>
             <div className="text-left flex-1 relative ml-24 overflow-hidden">
-              <h2 className="text-4xl font-bold px-4 py-2 rounded-full inline-block transform translate-x-10 shadow-lg">
+              <h2 className="text-4xl font-bold font-nunito px-4 py-2 rounded-full inline-block transform translate-x-10 shadow-lg">
                 {layer.title}
               </h2>
               <p className={`mt-2 text-left font-sans text-lg ml-12 ${layer.textColor} font-bold`}>
@@ -119,11 +119,11 @@ const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
         onRequestClose={closeModal}
         contentLabel="Ejemplos"
         className="bg-white p-4 rounded shadow-lg"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50  flex justify-center items-center"
         style={{ content: { height: "80vh", overflow: "auto" } }}
       >
         <div
-          className="p-4 rounded shadow-lg h-full flex flex-col justify-between"
+          className="p-4 rounded shadow-lg h-full flex flex-col justify-between "
           style={{
             backgroundImage: "url('/network-background.svg')",
             backgroundSize: "cover",

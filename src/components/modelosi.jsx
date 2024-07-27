@@ -154,7 +154,7 @@ const ModeloOSI = ({ expandApplicationLayer }) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Ejemplos"
-        className="bg-white p-4 rounded shadow-lg"
+        className="bg-white p-4 rounded shadow-lg w-[90rem] max-w-full font-nunito"
         overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
         style={{ content: { height: "80vh", overflow: "auto" } }}
       >
@@ -167,7 +167,9 @@ const ModeloOSI = ({ expandApplicationLayer }) => {
           }}
         >
           <div>
-            <h2 className="text-xl font-bold mb-4 text-black">{currentTitle}</h2>
+            <h2 className="text-xl font-bold mb-4 text-black">
+              {currentTitle}
+            </h2>
             <p className="text-lg text-black">{currentExample}</p>
             <EjemplosOSI layerTitle={currentTitle} />
           </div>

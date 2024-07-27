@@ -34,21 +34,21 @@ const layers = [
     bgColor: "bg-gradient-to-r from-blue-600 to-blue-400",
     textColor: "text-[#60A5FA]",
     imgSrc: "/datalinktcp.svg",
-  }
+  },
 ];
 
 const layerDetails = {
   4: "4. Capa de Aplicación (Application): Proporciona servicios de red directamente a las aplicaciones del usuario final. Esta capa permite que las aplicaciones accedan a los servicios de red y define los protocolos utilizados por las aplicaciones para comunicarse.",
   3: "3. Capa de Transporte (Transport): Asegura la transmisión confiable de datos entre dispositivos mediante el control de flujo, corrección de errores y segmentación de datos. Gestiona la comunicación de extremo a extremo y la retransmisión de datos perdidos o dañados.",
   2: "2. Capa de Internet (Network): Se encarga del direccionamiento lógico y el enrutamiento de paquetes de datos a través de diferentes redes. Determina la mejor ruta para que los datos lleguen a su destino y maneja la fragmentación y reensamblaje de paquetes.",
-  1: "1. Capa de Acceso a la Red (Network Interface): Define los métodos para la transmisión de datos a través del medio físico de la red. Esto incluye especificaciones sobre los formatos de tramas de datos, protocolos de acceso al medio y transmisión física."
+  1: "1. Capa de Acceso a la Red (Network Interface): Define los métodos para la transmisión de datos a través del medio físico de la red. Esto incluye especificaciones sobre los formatos de tramas de datos, protocolos de acceso al medio y transmisión física.",
 };
 
 const examples = {
   4: "Ejemplos de esta capa: Navegadores web (HTTP), clientes de correo (SMTP, POP3), clientes FTP.",
   3: "Ejemplos de esta capa Protocolo de Control de Transmisión (TCP), Protocolo de Datagramas de Usuario (UDP).",
   2: "Ejemplos de esta capa: Protocolo de Internet (IP), Protocolo de Mensajes de Control de Internet (ICMP), Protocolo de Pasarela Exterior (BGP).",
-  1: "Ejemplos de esta capa: Ethernet, Wi-Fi, DSL."
+  1: "Ejemplos de esta capa: Ethernet, Wi-Fi, DSL.",
 };
 
 const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
@@ -78,7 +78,15 @@ const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
       {layers.map((layer) => (
         <div key={layer.id} className="w-full">
           <div
-            className={`w-full ${expandApplicationLayer && layer.id === 4 ? 'h-[21.8rem]' : expandDataAccessLayer && layer.id === 1 ? 'h-56' : 'h-28'} ${layer.bgColor} text-white flex items-center relative px-4 py-4 transition transform duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer`}
+            className={`w-full ${
+              expandApplicationLayer && layer.id === 4
+                ? "h-[21.8rem]"
+                : expandDataAccessLayer && layer.id === 1
+                ? "h-56"
+                : "h-28"
+            } ${
+              layer.bgColor
+            } text-white flex items-center relative px-4 py-4 transition transform duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer`}
             onClick={() => handleExpand(layer.id)}
           >
             <div className="absolute left-12 top-4 text-2xl font-bold">
@@ -89,7 +97,9 @@ const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
               <h2 className="text-4xl font-bold font-nunito px-4 py-2 rounded-full inline-block transform translate-x-10 shadow-lg">
                 {layer.title}
               </h2>
-              <p className={`mt-2 text-left font-sans text-lg ml-12 ${layer.textColor} font-bold`}>
+              <p
+                className={`mt-2 text-left font-sans text-lg ml-12 ${layer.textColor} font-bold`}
+              >
                 PROTOCOLOS: {layer.protocols}
               </p>
             </div>
@@ -118,12 +128,12 @@ const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Ejemplos"
-        className="bg-white p-4 rounded shadow-lg"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50  flex justify-center items-center"
+        className="bg-white p-4 rounded shadow-lg w-[90rem] max-w-full font-nunito"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
         style={{ content: { height: "80vh", overflow: "auto" } }}
       >
         <div
-          className="p-4 rounded shadow-lg h-full flex flex-col justify-between "
+          className="p-4 rounded shadow-lg h-full flex flex-col justify-between"
           style={{
             backgroundImage: "url('/network-background.svg')",
             backgroundSize: "cover",
@@ -131,7 +141,9 @@ const Modelotcpip = ({ expandApplicationLayer, expandDataAccessLayer }) => {
           }}
         >
           <div>
-            <h2 className="text-xl font-bold mb-4 text-black">{currentTitle}</h2>
+            <h2 className="text-xl font-bold mb-4 text-black">
+              {currentTitle}
+            </h2>
             <p className="text-lg text-black">{currentExample}</p>
             <EjemplosTCPIP layerTitle={currentTitle} />
           </div>
